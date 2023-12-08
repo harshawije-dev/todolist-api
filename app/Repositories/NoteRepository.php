@@ -49,5 +49,7 @@ class NoteRepository implements INoteRepository
 
     public function destroy($id)
     {
+        $this->note->findOrFail($id);
+        return $this->note->where('id', $id)->destroy();
     }
 }

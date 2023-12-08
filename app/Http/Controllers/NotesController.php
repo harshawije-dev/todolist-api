@@ -61,6 +61,13 @@ class NotesController extends Controller
     }
 
     /**
+     * Show single record.
+     */
+    public function show(string $id)
+    {
+    }
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateNote $note, string $id)
@@ -73,7 +80,7 @@ class NotesController extends Controller
         }
     }
 
-    function archive(ArchiveNote $note, string $id)
+    public function archive(ArchiveNote $note, string $id)
     {
         try {
             $response = $this->note->archive($note->all(), $id);
@@ -88,10 +95,19 @@ class NotesController extends Controller
      */
     public function destroy(string $id)
     {
-        return "Delete";
+        try {
+            $response = $this->note->delete($id);
+            return $this->successJsonResponse($response);
+        } catch (Exception $error) {
+            return $this->errorBadRequestJsonResponse($error);
+        }
     }
 
     /**
      * Archived List
      */
+    public function archives()
+    {
+        return "true";
+    }
 }

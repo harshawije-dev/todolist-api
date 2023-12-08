@@ -61,6 +61,7 @@ class NoteService implements INoteService
 
     public function delete($id)
     {
+        return $this->note->destroy($id);
     }
 
     public function listArchive($skip = 0, $take = 10)

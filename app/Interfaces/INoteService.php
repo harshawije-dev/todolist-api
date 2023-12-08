@@ -62,5 +62,5 @@ interface INoteService
      * @param int $skip
      */
 
-     public function listArchive($skip=0, $take=10);
+     public function listArchive($skip, $take);
 }

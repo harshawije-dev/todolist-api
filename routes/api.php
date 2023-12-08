@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\NotesController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 
@@ -10,5 +8,11 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::resource('notes', NotesController::class);
+// Route::resource('notes', [NotesController::class]);
+
+Route::get('notes', [NotesController::class, 'index']);
+Route::post('notes', [NotesController::class, 'store']);
+Route::put('notes/{id}', [NotesController::class, 'update']);
+Route::delete('notes/{id}', [NotesController::class, 'delete']);
 Route::put('notes/{id}/archive', [NotesController::class, 'archive']);
+Route::get('notes/archive', [NotesController::class, 'archives']);
