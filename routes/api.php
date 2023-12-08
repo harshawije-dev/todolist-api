@@ -11,4 +11,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::resource('notes', NotesController::class);
-Route::post('notes/{id}/archive', [NotesController::class, 'archive']);
+Route::put('notes/{id}/archive', [NotesController::class, 'archive']);
