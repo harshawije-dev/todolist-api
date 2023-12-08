@@ -80,6 +80,9 @@ class NotesController extends Controller
         }
     }
 
+    /**
+     * Archive the specified resource from the storage.
+     */
     public function archive(ArchiveNote $note, string $id)
     {
         try {
@@ -104,7 +107,7 @@ class NotesController extends Controller
     }
 
     /**
-     * Archived List
+     * Display a listing of the archived resources
      */
     public function archives()
     {
