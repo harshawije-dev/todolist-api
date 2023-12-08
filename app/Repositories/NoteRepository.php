@@ -9,7 +9,7 @@ class NoteRepository implements INoteRepository
 {
     private $note;
 
-    private function __construct(Notes $note)
+    public function __construct(Notes $note)
     {
         $this->note = $note;
     }

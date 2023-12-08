@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateNote;
 use App\Services\NoteService;
 use Exception;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class NotesController extends Controller
@@ -21,7 +20,7 @@ class NotesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index()
     {
         return response()->json(
             [
@@ -39,27 +38,15 @@ class NotesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $note): JsonResponse
+    public function store(CreateNote $note)
     {
         try {
-
-            $record = $this->note->store($note->all());
-            return response()->json(
-                [
-                    'message' => "Record Created Successfully",
-                    'data' => $record,
-
-                ]
-            );
+            $response = $this->note->store($note->all());
+            return $this->successJsonResponse($response);
+            
         } catch (Exception $error) {
 
-            return response()->json(
-                [
-                    'message' => 'Error Record',
-                    'data' => $error->getMessage(),
-                ],
-                400
-            );
+            return $this->errorBadRequestJsonResponse($error);
         }
     }
 
