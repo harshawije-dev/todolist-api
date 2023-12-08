@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Requests\CreateNote;
+use App\Http\Requests\UpdateNote;
 use App\Services\NoteService;
 use Exception;
 use Illuminate\Http\Request;
@@ -20,18 +21,20 @@ class NotesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(
-            [
-                [
-                    'id' => "id",
-                    'note' => 'note',
-                    'reminder' => true || false
-                ],
-            ],
-            200
-        );
+        if (!$request->query()) {
+
+            $response = $this->note->list();
+            return $this->successJsonResponse($response);
+
+        } else {
+            $skip = intval($request->query('skip'));
+            $take = intval($request->query('take'));
+
+            $response = $this->note->pagination($skip, $take);
+            return $response;
+        }
     }
 
 
@@ -41,22 +44,14 @@ class NotesController extends Controller
     public function store(CreateNote $note)
     {
         try {
-            $response = $this->note->store($note->all());
+            $response = $this->note->create($note->all());
             return $this->successJsonResponse($response);
-            
         } catch (Exception $error) {
 
             return $this->errorBadRequestJsonResponse($error);
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        return "Show Note";
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -69,9 +64,13 @@ class NotesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateNote $note, string $id)
     {
-        return "Update";
+        try {
+            return $note;
+        } catch (Exception $error) {
+            return $error;
+        }
     }
 
     /**
@@ -83,10 +82,6 @@ class NotesController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Archived List
      */
-    public function archive(string $id)
-    {
-        return $id;
-    }
 }

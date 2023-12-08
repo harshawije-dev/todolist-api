@@ -10,7 +10,7 @@ trait JsonResponse
     public function successJsonResponse($response)
     {
         return response()->json([
-            'message' => "Record Created Successfully",
+            'message' => "Successful",
             'data' => $response,
         ], 200);
     }
