@@ -34,12 +34,16 @@ class NoteRepository implements INoteRepository
         return $new_record->id;
     }
 
-    public function archive($id)
+    public function archive($request, $id)
     {
+
+        $this->note->findOrFail($id);
+        return $this->note->where('id', $id)->update($request);
     }
 
     public function update($request, $id)
     {
+        $this->note->findOrFail($id);
         return $this->note->where('id', $id)->update($request);
     }
 

@@ -53,7 +53,7 @@ interface INoteService
      * 
      */
 
-    public function archive($id);
+    public function archive($request, $id);
 
     /**
      * List Archive notes

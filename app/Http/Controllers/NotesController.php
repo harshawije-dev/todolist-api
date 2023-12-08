@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Requests\ArchiveNote;
 use App\Http\Requests\CreateNote;
 use App\Http\Requests\UpdateNote;
 use App\Services\NoteService;
@@ -67,20 +67,20 @@ class NotesController extends Controller
     {
         try {
             $response = $this->note->update($note->all(), $id);
-            if (!$response) {
-                return $this
-                    ->errorNotFoundJsonResponse(new Exception("server cannot find the requested resource"));
-            }
             return $this->successJsonResponse($response);
-
         } catch (Exception $error) {
             return $this->errorBadRequestJsonResponse($error);
         }
     }
 
-    function archive()
+    function archive(ArchiveNote $note, string $id)
     {
-        
+        try {
+            $response = $this->note->archive($note->all(), $id);
+            return $this->successJsonResponse($response);
+        } catch (Exception $error) {
+            return $this->errorBadRequestJsonResponse($error);
+        }
     }
 
     /**
