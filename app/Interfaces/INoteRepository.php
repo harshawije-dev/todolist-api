@@ -30,7 +30,7 @@ interface INoteRepository {
      * @param string
      * 
      */
-    public function update($id);
+    public function update($request, $id);
 
     /**
      * Delete note

@@ -27,7 +27,6 @@ class NotesController extends Controller
 
             $response = $this->note->list();
             return $this->successJsonResponse($response);
-
         } else {
             $skip = intval($request->query('skip'));
             $take = intval($request->query('take'));
@@ -67,10 +66,21 @@ class NotesController extends Controller
     public function update(UpdateNote $note, string $id)
     {
         try {
-            return $note;
+            $response = $this->note->update($note->all(), $id);
+            if (!$response) {
+                return $this
+                    ->errorNotFoundJsonResponse(new Exception("server cannot find the requested resource"));
+            }
+            return $this->successJsonResponse($response);
+
         } catch (Exception $error) {
-            return $error;
+            return $this->errorBadRequestJsonResponse($error);
         }
+    }
+
+    function archive()
+    {
+        
     }
 
     /**

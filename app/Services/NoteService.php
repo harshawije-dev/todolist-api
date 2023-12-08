@@ -38,8 +38,9 @@ class NoteService implements INoteService
         return $this->note->pagination($skip, $take);
     }
 
-    public function update($id)
+    public function update($request, $id)
     {
+        return $this->note->update($request, $id);
     }
 
     public function archive($id)

@@ -28,6 +28,6 @@ trait JsonResponse
         return response()->json([
             'message' => "Error Occurred",
             'error' => $error->getMessage(),
-        ], 404);
+        ], 400);
     }
 }

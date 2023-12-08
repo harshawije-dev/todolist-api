@@ -33,9 +33,10 @@ interface INoteService
      * Update note
      * 
      * @param string $id
+     * @param mixed $request
      */
 
-    public function update($id);
+    public function update($request, $id);
 
     /**
      * Delete note

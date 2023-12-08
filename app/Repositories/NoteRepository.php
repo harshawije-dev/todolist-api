@@ -38,8 +38,9 @@ class NoteRepository implements INoteRepository
     {
     }
 
-    public function update($id)
+    public function update($request, $id)
     {
+        return $this->note->where('id', $id)->update($request);
     }
 
     public function destroy($id)
