@@ -9,16 +9,8 @@ interface INoteService
      * 
      */
 
-    public function list();
+    public function list($request);
 
-    /**
-     * Get List of notes
-     * 
-     * @param int $skip
-     * @param int $take
-     */
-
-    public function pagination($skip, $take);
 
 
     /** 
@@ -58,9 +50,8 @@ interface INoteService
     /**
      * List Archive notes
      * 
-     * @param int $take
-     * @param int $skip
+     * @param mixed $request
      */
 
-     public function listArchive($skip, $take);
+     public function listArchive();
 }

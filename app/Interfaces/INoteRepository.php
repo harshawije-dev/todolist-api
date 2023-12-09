@@ -42,8 +42,14 @@ interface INoteRepository {
     /**
      * Archive note
      * @param string $id
-     * 
+     * @param mixed $request
      */
     public function archive($request, $id);
+
+    /**
+     * Archive List
+     * 
+     */
+    public function archives();
 
 }

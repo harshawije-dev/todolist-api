@@ -52,4 +52,9 @@ class NoteRepository implements INoteRepository
         $this->note->findOrFail($id);
         return $this->note->where('id', $id)->destroy();
     }
+
+    public function archives()
+    {
+        return $this->note->where('isArchived', true)->get();
+    }
 }

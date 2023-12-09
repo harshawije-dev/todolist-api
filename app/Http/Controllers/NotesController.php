@@ -23,17 +23,8 @@ class NotesController extends Controller
      */
     public function index(Request $request)
     {
-        if (!$request->query()) {
-
-            $response = $this->note->list();
-            return $this->successJsonResponse($response);
-        } else {
-            $skip = intval($request->query('skip'));
-            $take = intval($request->query('take'));
-
-            $response = $this->note->pagination($skip, $take);
-            return $response;
-        }
+        $response = $this->note->list($request);
+        return $this->successJsonResponse($response);
     }
 
 
@@ -111,6 +102,7 @@ class NotesController extends Controller
      */
     public function archives()
     {
-        return "true";
+        $response = $this->note->listArchive();
+        return $this->successJsonResponse($response);
     }
 }

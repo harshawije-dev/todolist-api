@@ -28,14 +28,19 @@ class NoteService implements INoteService
         return $this->note->store($request);
     }
 
-    public function list()
+    public function list($request)
     {
-        return $this->note->index();
-    }
+        if (!$request->query()) {
 
-    public function pagination($skip, $take)
-    {
-        return $this->note->pagination($skip, $take);
+            return $this->note->index();
+            
+        } else {
+            $skip = intval($request->query('skip'));
+            $take = intval($request->query('take'));
+
+            $response = $this->note->pagination($skip, $take);
+            return $response;
+        }
     }
 
     /**
@@ -64,7 +69,8 @@ class NoteService implements INoteService
         return $this->note->destroy($id);
     }
 
-    public function listArchive($skip = 0, $take = 10)
+    public function listArchive()
     {
+        return $this->note->archives();
     }
 }
